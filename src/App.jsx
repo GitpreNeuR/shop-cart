@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar, Sidebar, Footer, Toast, ErrorBoundary } from './components';
 import { useProductsContext } from './context/products_context';
 import 'react-toastify/dist/ReactToastify.css';
+
 import {
   Home,
   About,
@@ -22,8 +23,7 @@ import {
 
 function App() {
   const { isSidebarOpen } = useProductsContext();
-  const overflowPropertyToHideScroll =
-    isSidebarOpen === true ? 'hidden' : 'scroll';
+  const overflowPropertyToHideScroll = isSidebarOpen ? 'hidden' : 'scroll';
 
   return (
     <div style={{ maxHeight: '100vh', overflow: overflowPropertyToHideScroll }}>
@@ -31,47 +31,31 @@ function App() {
         <Toast />
         <Navbar />
         <Sidebar />
+
         <ErrorBoundary>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/about'>
-              <About />
-            </Route>
-            <Route exact path='/products'>
-              <Products />
-            </Route>
-            <Route exact path='/cart'>
-              <Cart />
-            </Route>
-            <PrivateRoute exact path='/login'>
-              <Login />
-            </PrivateRoute>
-            <PrivateRoute exact path='/register'>
-              <Register />
-            </PrivateRoute>
-            <PrivateRoute exact path='/forgot-password'>
-              <Forgot />
-            </PrivateRoute>
-            <PrivateRoute exact path='/reset-password'>
-              <Reset />
-            </PrivateRoute>
-            <Route exact path='/products/:id' children={<SingleProduct />} />
-            <PrivateRoute exact path='/checkout'>
-              <Checkout />
-            </PrivateRoute>
-            <PrivateRoute exact path='/orders'>
-              <OrdersPage />
-            </PrivateRoute>
-            <PrivateRoute exact path='/profile'>
-              <ProfilePage />
-            </PrivateRoute>
-            <Route exact path='*'>
-              <Error />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+
+            {/* Auth routes using PrivateRoute wrapper */}
+            <Route path="/login" element={<PrivateRoute><Login /></PrivateRoute>} />
+            <Route path="/register" element={<PrivateRoute><Register /></PrivateRoute>} />
+            <Route path="/forgot-password" element={<PrivateRoute><Forgot /></PrivateRoute>} />
+            <Route path="/reset-password" element={<PrivateRoute><Reset /></PrivateRoute>} />
+
+            <Route path="/products/:id" element={<SingleProduct />} />
+
+            <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
+            <Route path="/orders" element={<PrivateRoute><OrdersPage /></PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+
+            {/* Catch-all 404 */}
+            <Route path="*" element={<Error />} />
+          </Routes>
         </ErrorBoundary>
+
         <Footer />
       </Router>
     </div>
