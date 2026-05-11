@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth } from '../utils/init-firebase';
-import { toast } from 'react-toastify';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

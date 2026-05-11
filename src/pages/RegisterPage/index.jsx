@@ -147,7 +147,7 @@ function RegisterPage() {
                 });
             }}
           >
-            <img src={GoogleIcon}/>
+            <img alt="icon" src={GoogleIcon}/>
             sign in with google
           </button>
 
@@ -165,7 +165,7 @@ function RegisterPage() {
                 });
             }}
           >
-            <img src={GithubIcon}/>
+            <img alt="icon" src={GithubIcon}/>
             sign in with github
           </button>
         </form>

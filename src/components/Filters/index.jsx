@@ -1,4 +1,3 @@
-import React from 'react';
 import Wrapper from './styles';
 import { useFilterContext } from '../../context/filter_context';
 import { getUniqueValues, formatPrice } from '../../utils/helpers';
@@ -11,7 +10,6 @@ const Filters = () => {
       company,
       category,
       color,
-      min_price,
       max_price,
       price,
       shipping,

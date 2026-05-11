@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import Wrapper from './styles';
 import { useUserContext } from '../../context/user_context';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -119,7 +119,7 @@ function LoginPage() {
                 });
             }}
           >
-            <img src={GoogleIcon}/>
+            <img alt="icon" src={GoogleIcon}/>
             sign in with google
           </button>
 
@@ -137,7 +137,7 @@ function LoginPage() {
                 });
             }}
           >
-            <img src={GithubIcon}/>
+            <img alt="icon" src={GithubIcon}/>
             sign in with github
           </button>
         </form>

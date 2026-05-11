@@ -1,4 +1,3 @@
-import React from 'react';
 import {HeroBanner} from './styles';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +18,7 @@ const Hero = () => {
                     <Link to="/products" className="banner-cta v2">Shop Now</Link>
                 </div>
             </div>
-            <img className="banner-img" src={bannerImg} />
+<img className="banner-img" alt="Sales banner" src={bannerImg} />
         </div>
     </HeroBanner>
   );
