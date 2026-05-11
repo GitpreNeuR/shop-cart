@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Wrapper from './styles';
 import { useUserContext } from '../../context/user_context';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useMounted from '../../hooks/useMounted';
 import { toast } from 'react-toastify';
 import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs';
@@ -10,7 +10,7 @@ import GoogleIcon from '../../assets/google.png'
 import GithubIcon from '../../assets/github-mark.png'
 
 function RegisterPage() {
-  const history = useHistory();
+  const history = useNavigate();
   const mounted = useMounted();
   const { registerUser, signInWithGoogle,signInWithGithub } = useUserContext();
   const [email, setEmail] = useState('');

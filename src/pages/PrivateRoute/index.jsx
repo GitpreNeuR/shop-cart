@@ -1,33 +1,37 @@
 import React from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useUserContext } from '../../context/user_context';
 
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({ children, path }) => {
   const { currentUser } = useUserContext();
   const location = useLocation();
 
-  if (
-    rest.path === '/login' ||
-    rest.path === '/register' ||
-    rest.path === '/forgot-password' ||
-    rest.path === '/reset-password'
-  ) {
+  const authRoutes = [
+    '/login',
+    '/register',
+    '/forgot-password',
+    '/reset-password',
+  ];
+
+  // If user is logged in and tries to access auth pages
+  if (authRoutes.includes(path)) {
     return currentUser ? (
-      <Redirect to={location.state?.from ?? '/'} />
+      <Navigate to={location.state?.from || '/'} replace />
     ) : (
-      <Route {...rest}>{children}</Route>
+      children
     );
   }
 
+  // Protected routes
   return currentUser ? (
-    <Route {...rest}>{children}</Route>
+    children
   ) : (
-    <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: rest.path },
-      }}
+    <Navigate
+      to="/login"
+      state={{ from: location.pathname }}
+      replace
     />
   );
 };
+
 export default PrivateRoute;
