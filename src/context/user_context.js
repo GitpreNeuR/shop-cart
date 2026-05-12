@@ -99,17 +99,16 @@ export const UserProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (!currentUser) {
-      return;
-    }
-    if (!currentUser.photoURL) {
-      updateUserProfileImage(default_profile_image)
-        .then(() => setCurrentUser(currentUser))
-        .catch(() => console.log('Error occured'));
-    }
-    // eslint-disable-next-line
-  }, [currentUser]);
+useEffect(() => {
+  if (!currentUser || currentUser.photoURL) {
+    return;
+  }
+
+  updateUserProfileImage(default_profile_image).catch(() =>
+    console.log('Error occurred')
+  );
+  // eslint-disable-next-line
+}, [currentUser?.uid]);
 
   return (
     <UserContext.Provider

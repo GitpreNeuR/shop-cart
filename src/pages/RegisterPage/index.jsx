@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import Wrapper from './styles';
 import { useUserContext } from '../../context/user_context';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import GoogleIcon from '../../assets/google.png'
 import GithubIcon from '../../assets/github-mark.png'
 
 function RegisterPage() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const mounted = useMounted();
   const { registerUser, signInWithGoogle,signInWithGithub } = useUserContext();
   const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ function RegisterPage() {
     setIsSubmitting(true);
     registerUser(email, password)
       .then((res) => {
-        history.push('/');
+        navigate('/');
       })
       .catch((err) => {
         toast.error(`Error: ${err.message}`);
@@ -127,6 +127,7 @@ function RegisterPage() {
             <Link to='/login' className='link'>
               login
             </Link>
+            
           </div>
           {/* end links */}
           <div className='seperator'>
@@ -140,7 +141,7 @@ function RegisterPage() {
             onClick={() => {
               signInWithGoogle()
                 .then((user) => {
-                  history.push('/');
+                  navigate('/');
                 })
                 .catch((err) => {
                   toast.error(`Error: ${err.message}`);
@@ -158,7 +159,7 @@ function RegisterPage() {
             onClick={() => {
               signInWithGithub()
                 .then((user) => {
-                  history.push('/');
+                  navigate('/');
                 })
                 .catch((err) => {
                   toast.error(`Error: ${err.message}`);

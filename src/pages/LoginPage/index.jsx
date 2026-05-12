@@ -10,7 +10,7 @@ import GoogleIcon from '../../assets/google.png'
 import GithubIcon from '../../assets/github-mark.png'
 
 function LoginPage() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
   const mounted = useMounted();
   const { loginUser, signInWithGoogle, signInWithGithub } = useUserContext();
@@ -33,7 +33,7 @@ function LoginPage() {
     setIsSubmitting(true);
     loginUser(email, password)
       .then((res) => {
-        history.push(location.state?.from ?? '/');
+        navigate(location.state?.from ?? '/');
       })
       .catch((err) => {
         toast.error(`Error: ${err.message}`);
@@ -76,6 +76,7 @@ function LoginPage() {
               className='input'
               placeholder='Password'
               value={password}
+              
               autoComplete='off'
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -112,7 +113,7 @@ function LoginPage() {
             onClick={() => {
               signInWithGoogle()
                 .then((user) => {
-                  history.push('/');
+                  navigate('/');
                 })
                 .catch((err) => {
                   toast.error(`Error: ${err.message}`);
@@ -130,7 +131,7 @@ function LoginPage() {
             onClick={() => {
               signInWithGithub()
                 .then((user) => {
-                  history.push('/');
+                  navigate('/');
                 })
                 .catch((err) => {
                   toast.error(`Error: ${err.message}`);

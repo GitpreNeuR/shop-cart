@@ -39,17 +39,41 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
 
-            {/* Auth routes using PrivateRoute wrapper */}
-            <Route path="/login" element={<PrivateRoute><Login /></PrivateRoute>} />
-            <Route path="/register" element={<PrivateRoute><Register /></PrivateRoute>} />
-            <Route path="/forgot-password" element={<PrivateRoute><Forgot /></PrivateRoute>} />
-            <Route path="/reset-password" element={<PrivateRoute><Reset /></PrivateRoute>} />
+            {/* Public auth routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<Forgot />} />
+            <Route path="/reset-password" element={<Reset />} />
 
             <Route path="/products/:id" element={<SingleProduct />} />
 
-            <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
-            <Route path="/orders" element={<PrivateRoute><OrdersPage /></PrivateRoute>} />
-            <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+            {/* Protected routes */}
+            <Route
+              path="/checkout"
+              element={
+                <PrivateRoute>
+                  <Checkout />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/orders"
+              element={
+                <PrivateRoute>
+                  <OrdersPage />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <ProfilePage />
+                </PrivateRoute>
+              }
+            />
 
             {/* Catch-all 404 */}
             <Route path="*" element={<Error />} />

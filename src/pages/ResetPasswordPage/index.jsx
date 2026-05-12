@@ -6,7 +6,7 @@ import useQuery from '../../hooks/useQuery';
 import { toast } from 'react-toastify';
 
 function ResetPasswordPage() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { resetPassword } = useUserContext();
   const query = useQuery();
   const [password, setPassword] = useState('');
@@ -21,13 +21,13 @@ function ResetPasswordPage() {
     }
 
     if (!oobCode) {
-      return history.push('/');
+      return navigate('/');
     }
 
     resetPassword(oobCode, password)
       .then((res) => {
         toast.success('Password changed successfully, login to continue');
-        history.push('/login');
+        navigate('/login');
       })
       .catch((err) => {
         toast.error(`Error: ${err.message}`);

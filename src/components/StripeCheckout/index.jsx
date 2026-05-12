@@ -22,7 +22,7 @@ const CheckoutForm = () => {
   const { cart, total_amount, shipping_fee, clearCart } = useCartContext();
   const { shipping, placeOrder } = useOrderContext();
   const { currentUser } = useUserContext();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   // STRIPE STUFF
   const [succeeded, setSucceeded] = useState(false);
@@ -93,7 +93,7 @@ const CheckoutForm = () => {
       await placeOrder();
       setTimeout(() => {
         clearCart();
-        history.push('/orders');
+        navigate('/orders');
       }, 5000);
     }
   };
